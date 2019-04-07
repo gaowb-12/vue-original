@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <div id="app">
+            <!--  解析插值表达式 -->
+            <h2>title 是 {{title}}</h2>
+            <!-- 解析常见指令 -->
+            <p v-html='msg1' title='混淆属性1'>混淆文本1</p>
+            <p v-text='msg2' title='混淆属性2'>混淆文本2</p>
+            <input type="text" v-model="something">
+            <!-- 双向数据绑定 -->
+            <p>{{something}}</p>
+            <!-- 复杂数据类型 -->
+            <p>{{dad.son.name}}</p>
+            <p v-html='dad.son.name'></p>
+            <input type="text" v-model="dad.son.name"> 
+            
+            <button v-on:click='sayHi'>sayHi</button>
+            <button @click='printThis'>printThis</button>
+        </div>
+    <script src="./compile.js"></script>
+    <script src="./index.js"></script>
+    <script>
+        let vm = new Vue({
+                el: '#app',
+                data: {
+                    title: '手把手教你撸一个vue框架',
+                    msg1: '<a href="#">应该被解析成a标签</a>',
+                    msg2: '<a href="#">不应该被解析成a标签</a>',
+                    something: 'placeholder',
+                    dad: {
+                        name: 'foo',
+                        son: {
+                            name: 'bar',
+                            son: {}
+                        }
+                    }
+                },
+                methods: {
+                    sayHi() {
+                        console.log('hello world')
+                    },
+                    printThis() {
+                        console.log(this)
+                    }
+                }
+            })
+            console.log(vm)
+    </script>
+</body>
+</html>
