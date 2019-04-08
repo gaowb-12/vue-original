@@ -14,7 +14,7 @@ class Observer{
             this.walk(data[key])
         });
     }
-    defineReactive(data,key,data[key]){
+    defineReactive(data,key,value){
         let dep = new Dep()
         Object.defineProperty(data,key,{
             enumerable:true,

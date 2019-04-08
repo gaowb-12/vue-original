@@ -14,9 +14,9 @@ class Vue{
         this.proxy(this.$data)
         this.proxy(this.$methods)
         // 监听数据
-        // new Observer(this.$data)
+        new Observer(this.$data)
         if(this.$el){
-            // new Compile(this.$el,this);
+            new Compile(this.$el,this);
         }
     }
     // 挂载属性到实例上
