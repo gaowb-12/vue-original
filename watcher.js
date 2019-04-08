@@ -17,6 +17,7 @@ class Watcher{
         if(oldValue!=newValue){
             // 执行回调，更新页面
             this.callback(newValue,oldValue)
+            this.oldValue=newValue
         }
     }
     // 数据是复杂数据的情形
@@ -34,12 +35,10 @@ class Dep {
         // 初始化一个空数组，用来存储订阅者
         this.subs = []
     }
-
     // 添加订阅者
     addSub(watcher){
         this.subs.push(watcher)
     }
- 
     // 通知
     notify() {
         // 通知所有的订阅者更改页面

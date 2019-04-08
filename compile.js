@@ -35,6 +35,31 @@ class Compile{
             }
         })
     }
+    compileElementNode(node){
+        let text=this.getBindAttribute(node,"v-text")||this.getBindAttribute(node,":text")
+        if(text){
+            CompileUtils.text(node,this.vm,text)
+        }
+        let html=this.getBindAttribute(node,"v-html")||this.getBindAttribute(node,":html")
+        if(html){
+            CompileUtils.html(node,this.vm,html)
+        }
+        let model=this.getBindAttribute(node,"v-model")||this.getBindAttribute(node,":model")
+        if(model){
+            CompileUtils.model(node,this.vm,model)
+        }
+        // 解析事件
+        // let eventHandler=this.getBindAttribute(node,"v-on")||this.getBindAttribute(node,":html")
+        // if(eventHandler){
+        //     CompileUtils.eventHandler(node,this.vm,eventHandler)
+        // }
+    }
+    compileTextNode(node){
+        CompileUtils.mustache(node,this.vm)
+    }
+    getBindAttribute(node,attr){
+        return node.getAttribute(attr)
+    }
     // 获取文档片段
     node2fragment(node){
         let fragment=document.createDocumentFragment();

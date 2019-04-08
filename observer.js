@@ -15,6 +15,7 @@ class Observer{
         });
     }
     defineReactive(data,key,value){
+        let that=this
         let dep = new Dep()
         Object.defineProperty(data,key,{
             enumerable:true,
@@ -28,7 +29,7 @@ class Observer{
                 if(val==value) return 
                 value=val
                 // 如果是对象
-                this.walk(value)
+                that.walk(value)
                 // 发布通知，让所有订阅者更新数据
                 dep.notify()
             }
